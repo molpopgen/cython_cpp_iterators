@@ -1,13 +1,18 @@
 # distutils: language = c++
+
+##Define the basic iterator types (this is incomplete)
 cdef extern from "<iterator>" namespace "std":
     cdef cppclass iterator[Category,T,Distance,Pointer,Reference]:
         pass
     cdef cppclass output_iterator_tag:
         pass
+    #The goal here is to get back_inserter working, as it is handy.
     cdef cppclass back_insert_iterator[T](iterator[output_iterator_tag,void,void,void,void]):
         pass
     back_insert_iterator[CONTAINER] back_inserter[CONTAINER](CONTAINER &)
 
+##Not shown here, but I've gotten C++11's move algorithm to work, too,
+##using same kind of prototype
 cdef extern from "<algorithm>" namespace "std":
     OUTPUT copy[INPUT,OUTPUT](INPUT,INPUT,OUTPUT)
 
